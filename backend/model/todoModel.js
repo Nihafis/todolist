@@ -25,6 +25,19 @@ const Task = {
     });
   },
 
+  editTasks: (task, result) => {
+
+    db.query("UPDATE tasks SET title = ? WHERE id = ?", [task.title, task.id], (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      console.log("updated task: ", task);
+      result(null, task);
+    })
+  },
+
   deleteTask: (task, result) => {
     db.query("DELETE FROM tasks WHERE id = ?", task, (err, res) => {
       if (err) {
@@ -37,7 +50,7 @@ const Task = {
         return;
       }
       console.log(task);
-      
+
       console.log("deleted task with id: ", task);
       result(null, res);
     });

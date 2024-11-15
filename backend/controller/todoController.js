@@ -18,6 +18,37 @@ export const getTask = (req, res, next) => {
     return res.status(500).send("Internal Server Error.");
   }
 };
+export const editTask = (req, res, next) => {
+  try {
+    const { id } = req.params;
+    // console.log(id);
+
+    if (!id) {
+      return res.status(400).send({ message: "Task ID is required" });
+    }
+
+    const { title } = req.body;
+    if (!title) {
+      return res.status(400).send({ message: "Task title is required" });
+    }
+
+    if (title) {
+      const editedTask = {
+        id,
+        title,
+      }
+      Task.editTasks(editedTask, (err, result) => {
+        if (err) {
+          console.log(err);
+          return res.status(500).send("Internal Server Error2." + err);
+        }
+        return res.status(200).json({ message: "Task updated successfully" });
+      });
+    }
+  } catch (error) {
+    return res.status(500).send("Internal Server Error" + error)
+  }
+}
 
 export const addTask = (req, res, next) => {
   try {
@@ -53,7 +84,7 @@ export const deleteTask = (req, res) => {
   try {
     const { id } = req.params;
     // console.log(id);
-    
+
     Task.deleteTask(id, (err, result) => {
       if (err) {
         // console.log(err);

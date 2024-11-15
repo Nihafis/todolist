@@ -9,10 +9,7 @@
       </button>
     </div>
   
-    <ul class="space-y-2">
-  
-  
-  
+    <ul class="space-y-2">  
       <li v-for="task in tasks" :key="task.id"
         class="flex items-center justify-between p-3 bg-gray-50 border rounded-md hover:shadow-md">
         <div class="flex items-center space-x-2">
@@ -37,8 +34,7 @@
   
   <script >
   import axios from "axios";
-  import { FwbDropdown, FwbListGroup, FwbListGroupItem } from 'flowbite-vue'
-  
+ 
   export default {
     data() {
       return {

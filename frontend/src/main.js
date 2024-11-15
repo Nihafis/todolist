@@ -1,9 +1,20 @@
 
 
 import { createApp } from 'vue'
-import App from './App.vue'
+import { Quasar } from 'quasar'
 
+// Import icon libraries
+import '@quasar/extras/material-icons/material-icons.css'
+// import '@/quasar-variables.sass';
+// Import Quasar css
+import 'quasar/src/css/index.sass'
+
+import App from './App.vue'
 import './index.css'
-import '../node_modules/flowbite-vue/dist/index.css'
-// import './assets/main.css'
-createApp(App).mount('#app')
+import router from './router';
+const app = createApp(App)
+app.use(router)
+app.use(Quasar, {
+    plugins: {}, // import Quasar plugins and add here
+})
+app.mount('#app')
